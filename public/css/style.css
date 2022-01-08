@@ -14,6 +14,7 @@ p {
     margin: 0;
     font: normal normal 300 22px/37px Dubai;
     font-size: 1.3em;
+    text-align: left;
     color: #FFFFFF;
 }
 
@@ -110,6 +111,11 @@ a {
     height: 70%;
 }
 
+.dual-box-content .box-content {
+    height: 100%;
+}
+
+
 .box-buttons {
     display: flex;
     justify-content: space-evenly;
@@ -151,6 +157,31 @@ input:focus {
     outline: none;
 }
 
+textarea {
+    width: 80%;
+    height: 100px;
+    outline: none;
+    opacity: 1;
+    font-size: 1.3em;
+    color: #FFFFFF;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #FFFFFF;
+    resize: none;
+    margin-bottom: 2%;
+}
+
+textarea:hover {
+    outline: none;
+    background-color: transparent;
+    border-bottom: 1px solid #FFFFFF;
+}
+
+input:focus {
+    background-color: transparent;
+    outline: none;
+}
+
 label {
     font-size: 1.2em;
     color: #fff;
@@ -159,6 +190,20 @@ label {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.border-label {
+    border: 1px solid #FFFFFF;
+}
+
+.border-label:hover {
+    background-color: #FFFFFF;
+    color: #000;
+
+}
+
+input[type="file"] {
+    display: none;
 }
 
 input[type='checkbox']{
@@ -421,6 +466,11 @@ hr {
 }
 
 /* end snippet */
+
+/* snippet-form */
+input[name="description"] {
+    height: 100%;
+}
 
 
 
