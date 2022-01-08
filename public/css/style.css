@@ -352,8 +352,6 @@ hr {
 
 .snippet-gallery li {
     width: 32%;
-    height: 50vh;
-    flex-direction: column;
     background: #0A0000 0% 0% no-repeat padding-box;
     border-radius: 3px;
     opacity: 0.85;
