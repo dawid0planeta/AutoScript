@@ -1,8 +1,9 @@
+
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font: normal normal 300 1em Dubai;
+    font: normal normal 300 1em Poppins;
 }
 
 ul {
@@ -10,9 +11,9 @@ ul {
 }
 
 p {
-    line-height: 1.5em;
+    line-height: 1.7em;
     margin: 0;
-    font: normal normal 300 22px/37px Dubai;
+    font: normal normal 400 22px/37px Poppins;
     font-size: 1.3em;
     text-align: left;
     color: #FFFFFF;
@@ -294,7 +295,7 @@ select > option {
 
 /* landing page */
 .big-logo p {
-    font: normal normal bold 125px/153px Fira Code;
+    font: normal normal bold 125px/153px Poppins;
     font-size: 10vw;
     color: #0A0000;
     opacity: 0.64;
@@ -316,7 +317,7 @@ select > option {
 #landing-center-box .box-title p {
     border: none;
     font-weight: bold;
-    font-size: 5vw;
+    font-size: 4vw;
     color: #FFFFFF;
 }
 
