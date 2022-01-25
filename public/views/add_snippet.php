@@ -11,30 +11,18 @@
     <title>Add new snippet</title>
 </head>
 <body>
-    <nav>
-        <div class="logo">
-            <a href="#">AS</a>
-        </div>
-        <ul class=menu>
-            <li class="item"><a href="#">Register</a></li>
-            <li class="item"><a href="#">Login</a></li>
-            <li class="item btn btn-call"><a href="#">Browse</a></li>
-        </ul>
-    </nav>
+    <?php $this->render('logged_in_navbar');?>
     <div class="background">
         <div class="center-box">
             <div class="box-title"><p>Add new snippet</p></div>
-            <div class="dual-box-content">
-                <div class="box-content">
-                    <form>
+            <form>
+                <div class="dual-box-content">
+                    <div class="box-content">
                         <input name="title" type="text" placeholder="Title">
                         <textarea placeholder="Description"></textarea>
                         <textarea placeholder="Instruction"></textarea>
-                        <label><input type="checkbox" name="consent" value="consent">I agree to selling my soul</label>
-                    </form>
-                </div>
-                <div class="box-content">
-                    <form>
+                    </div>
+                    <div class="box-content">
                         <p>Choose platforms</p>
                         <select name="platforms" id="platforms1">
                             <option value="windows">Windows</option>
@@ -54,12 +42,12 @@
                         <label class="border-label"><input type="file" id="screenshot_file" name="screenshot_file">+</label>
                         <p>Add snippet:</p>
                         <label class="border-label"><input type="file" id="snippet_file" name="snippet_file">+</label>
-                    </form>
+                    </div>
                 </div>
-            </div>
-            <div class="box-buttons">
-                <button class="btn box-btn btn-primary"type="submit">Login</button>
-            </div>
+                <div class="box-buttons">
+                    <button class="btn box-btn btn-primary"type="submit">Login</button>
+                </div>
+            </form>
         </div>
     </div>
 

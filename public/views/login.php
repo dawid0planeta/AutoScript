@@ -11,28 +11,19 @@
     <title>Login Page</title>
 </head>
 <body>
-    <nav>
-        <div class="logo">
-            <a href="/index">AS</a>
-        </div>
-        <ul class=menu>
-            <li class="item"><a href="/register">Register</a></li>
-            <li class="item"><a href="/login">Login</a></li>
-            <li class="item btn btn-call"><a href="/catalog">Browse</a></li>
-        </ul>
-    </nav>
+    <?php $this->render('logged_out_navbar');?>
     <div class="background">
         <div class="center-box">
             <div class="box-title"><p>Login</p></div>
-            <div class="box-content">
-                <form>
+            <form action="/login" method="POST">
+                <div class="box-content">
                     <input name="email" type="text" placeholder="email@email.com">
                     <input name="password" type="password" placeholder="password">
-                </form>
-            </div>
-            <div class="box-buttons">
-                <button class="btn box-btn btn-primary"type="submit">Login</button>
-            </div>
+                </div>
+                <div class="box-buttons">
+                    <button type="submit" class="btn box-btn btn-primary">Login</button>
+                </div>
+            </form>
         </div>
     </div>
 

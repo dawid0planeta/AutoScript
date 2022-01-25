@@ -17,11 +17,15 @@ class DefaultController extends AppController {
     }
 
     public function index() {
-        $this->render('landing');
+        $this->render('landing', ['message' => 'hello world']);
     }
 
     public function add_snippet() {
         $this->render('add_snippet');
+    }
+
+    public function my_snippets() {
+        $this->render('my_snippets');
     }
 
 }

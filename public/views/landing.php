@@ -11,16 +11,7 @@
     <title>AutoScript</title>
 </head>
 <body>
-    <nav>
-        <div class="logo">
-            <a href="/index">AS</a>
-        </div>
-        <ul class=menu>
-            <li class="item"><a href="/register">Register</a></li>
-            <li class="item"><a href="/login">Login</a></li>
-            <li class="item btn btn-call"><a href="/catalog">Browse</a></li>
-        </ul>
-    </nav>
+    <?php $this->render('logged_out_navbar');?>
     <div class="background">
         <div class="big-logo"><p>AutoScript</p></div>
         <div class="center-box" id="landing-center-box">

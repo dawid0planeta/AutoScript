@@ -11,58 +11,47 @@
     <title>Register Page</title>
 </head>
 <body>
-    <nav>
-        <div class="logo">
-            <a href="/index">AS</a>
-        </div>
-        <ul class=menu>
-            <li class="item"><a href="/register">Register</a></li>
-            <li class="item"><a href="/login">Login</a></li>
-            <li class="item btn btn-call"><a href="/catalog">Browse</a></li>
-        </ul>
-    </nav>
+    <?php $this->render('logged_out_navbar');?>
     <div class="background">
         <div class="center-box">
             <div class="box-title"><p>Register</p></div>
-            <div class="dual-box-content">
-                <div class="box-content">
-                    <form>
+            <form action="register" method="post">
+                <div class="dual-box-content">
+                    <div class="box-content">
                         <input name="email" type="text" placeholder="email@email.com">
                         <input name="password" type="password" placeholder="password">
                         <input name="repeat_password" type="password" placeholder="repeat password">
                         <label><input type="checkbox" name="consent" value="consent">I agree to selling my soul</label>
-                    </form>
+                    </div>
+                    <div class="box-content">
+                        <p>Choose platforms you use:</p>
+                        <select name="platform1">
+                            <option value="windows">Windows</option>
+                            <option value="linux">Linux</option>
+                            <option value="macos">MacOS</option>
+                            <option value="photoshop">Adobe Photoshop</option>
+                            <option value="illustrator">Adobe illustrator</option>
+                        </select>
+                        <select name="platform2">
+                            <option value="windows">Windows</option>
+                            <option value="linux">Linux</option>
+                            <option value="macos">MacOS</option>
+                            <option value="photoshop">Adobe Photoshop</option>
+                            <option value="illustrator">Adobe illustrator</option>
+                        </select>
+                        <select name="platform3">
+                            <option value="windows">Windows</option>
+                            <option value="linux">Linux</option>
+                            <option value="macos">MacOS</option>
+                            <option value="photoshop">Adobe Photoshop</option>
+                            <option value="illustrator">Adobe illustrator</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="box-content">
-                    <p>Choose platforms you use:</p>
-                    <form>
-                        <select name="platforms" id="platforms1">
-                            <option value="windows">Windows</option>
-                            <option value="linux">Linux</option>
-                            <option value="macos">MacOS</option>
-                            <option value="photoshop">Adobe Photoshop</option>
-                            <option value="illustrator">Adobe illustrator</option>
-                        </select>
-                        <select name="platforms" id="platforms2">
-                            <option value="windows">Windows</option>
-                            <option value="linux">Linux</option>
-                            <option value="macos">MacOS</option>
-                            <option value="photoshop">Adobe Photoshop</option>
-                            <option value="illustrator">Adobe illustrator</option>
-                        </select>
-                        <select name="platforms" id="platforms3">
-                            <option value="windows">Windows</option>
-                            <option value="linux">Linux</option>
-                            <option value="macos">MacOS</option>
-                            <option value="photoshop">Adobe Photoshop</option>
-                            <option value="illustrator">Adobe illustrator</option>
-                        </select>
-                    </form>
+                <div class="box-buttons">
+                    <button type="submit" class="btn box-btn btn-primary">Register</button>
                 </div>
-            </div>
-            <div class="box-buttons">
-                <button class="btn box-btn btn-primary"type="submit">Register</button>
-            </div>
+            </form>
         </div>
     </div>
 

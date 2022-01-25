@@ -1,22 +1,33 @@
 <?php
 
 require_once 'src/controllers/DefaultController.php';
+require_once 'src/controllers/SecurityController.php';
 
 class Routing {
-    public static $routes;
+    public static $get_routes;
+    public static $post_routes;
 
     public static function get($url, $controller) {
-        self::$routes[$url] = $controller;
+        self::$get_routes[$url] = $controller;
     }
 
-    public static function run($url) {
-        $action = explode('/', $url)[0];
+    public static function post($url, $controller) {
+        self::$post_routes[$url] = $controller;
+    }
 
-        if (!array_key_exists($action, self::$routes)) {
+    public static function run($url, $method) {
+        $action = explode('/', $url)[0];
+        if ($method == "GET") {
+            $routes = self::$get_routes;
+        } else if ($method == "POST") {
+            $routes = self::$post_routes;
+        }
+        if (!array_key_exists($action, $routes)) {
             die("URL doesn't exist");
         }
-        $controller = self::$routes[$action];
+        $controller = $routes[$action];
         $object = new $controller();
+        $action = $action ?: 'index';
         $object->$action();
     }
 }
