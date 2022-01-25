@@ -15,37 +15,28 @@
     <div class="background">
         <div class="center-box">
             <div class="box-title"><p>Add new snippet</p></div>
-            <form>
+            <form action="add_snippet" method="post" enctype="multipart/form-data">
                 <div class="dual-box-content">
                     <div class="box-content">
                         <input name="title" type="text" placeholder="Title">
-                        <textarea placeholder="Description"></textarea>
-                        <textarea placeholder="Instruction"></textarea>
+                        <textarea name="description" placeholder="Description"></textarea>
+                        <textarea name="instruction" placeholder="Instruction"></textarea>
                     </div>
                     <div class="box-content">
-                        <p>Choose platforms</p>
-                        <select name="platforms" id="platforms1">
+                        <p>Choose platform</p>
+                        <select name="platform" id="platforms">
                             <option value="windows">Windows</option>
                             <option value="linux">Linux</option>
                             <option value="macos">MacOS</option>
                             <option value="photoshop">Adobe Photoshop</option>
                             <option value="illustrator">Adobe illustrator</option>
                         </select>
-                        <select name="platforms" id="platforms2">
-                            <option value="windows">Windows</option>
-                            <option value="linux">Linux</option>
-                            <option value="macos">MacOS</option>
-                            <option value="photoshop">Adobe Photoshop</option>
-                            <option value="illustrator">Adobe illustrator</option>
-                        </select>
-                        <p>Add screenshots:</p>
-                        <label class="border-label"><input type="file" id="screenshot_file" name="screenshot_file">+</label>
                         <p>Add snippet:</p>
                         <label class="border-label"><input type="file" id="snippet_file" name="snippet_file">+</label>
                     </div>
                 </div>
                 <div class="box-buttons">
-                    <button class="btn box-btn btn-primary"type="submit">Login</button>
+                    <button class="btn box-btn btn-primary"type="submit">Add snippet</button>
                 </div>
             </form>
         </div>

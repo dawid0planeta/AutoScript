@@ -11,7 +11,7 @@
     <title>Snippet Catalog</title>
 </head>
 <body>
-    <?php $this->render('logged_out_navbar');?>
+    <?php $this->render('logged_in_navbar');?>
     <div class="background-long">
         <div class="gallery-container">
             <div class="search">

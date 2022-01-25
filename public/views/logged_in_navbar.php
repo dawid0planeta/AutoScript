@@ -1,6 +1,6 @@
 <nav>
     <div class="logo">
-        <a href="/my_account">AS</a>
+        <a href="/my_snippets">AS</a>
     </div>
     <ul class=menu>
         <li class="item"><a href="/logout">Logout</a></li>
