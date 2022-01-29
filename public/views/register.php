@@ -11,7 +11,11 @@
     <title>Register Page</title>
 </head>
 <body>
-    <?php $this->render('logged_out_navbar');?>
+    <?php if (isset($_SESSION['user_id'])): ?>
+        <?php $this->render('logged_in_navbar');?>
+    <?php else: ?>
+        <?php $this->render('logged_out_navbar');?>
+    <?php endif; ?>
     <div class="background">
         <div class="center-box">
             <div class="box-title"><p>Register</p></div>

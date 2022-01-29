@@ -11,7 +11,11 @@
     <title>AutoScript</title>
 </head>
 <body>
-    <?php $this->render('logged_out_navbar');?>
+    <?php if (isset($_SESSION['user_id'])): ?>
+        <?php $this->render('logged_in_navbar');?>
+    <?php else: ?>
+        <?php $this->render('logged_out_navbar');?>
+    <?php endif; ?>
     <div class="background">
         <div class="big-logo"><p>AutoScript</p></div>
         <div class="center-box" id="landing-center-box">
