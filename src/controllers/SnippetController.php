@@ -51,7 +51,8 @@ class SnippetController extends AppController {
     }
 
     public function my_snippets() {
-        return $this->render('my_snippets');
+        $snippets = $this->snippetRepository->getUserSnippets($_SESSION['user_id']);
+        $this->render('my_snippets', ['snippets' => $snippets]);
     }
 
     private function validate(array $file): bool {

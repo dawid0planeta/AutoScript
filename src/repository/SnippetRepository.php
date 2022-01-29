@@ -45,7 +45,7 @@ class SnippetRepository extends Repository
             INSERT INTO public.snippets (title, id_author, description, instruction, platform, snippet_filepath, created_at)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         ');
-        $id_author = 1;
+        $id_author = $_SESSION['user_id'];
         $author_name = 'dawid dawid';
         $snippet->setAuthorName($author_name);
         $stmt->execute([
@@ -67,6 +67,38 @@ class SnippetRepository extends Repository
             JOIN users u ON u.id = snippets.id_author
             JOIN users_details ud ON ud.id = u.id_user_details;
         ');
+
+        $stmt->execute();
+
+        $snippets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+        foreach ($snippets as $snippet) {
+            $author_name = $snippet['name'] . ' ' . $snippet['surname'];
+            $result[] = new Snippet (
+                $snippet['title'],
+                $snippet['description'],
+                $snippet['instruction'],
+                $snippet['platform'],
+                $snippet['snippet_filepath'],
+                $author_name
+            );
+        }
+
+        return $result;
+    }
+
+    public function getUserSnippets(): array {
+        $result = [];
+        $stmt = $this->database->connect()->prepare('
+            SELECT name, surname, title, description, instruction, platform, snippet_filepath
+            FROM public.snippets
+            JOIN users u ON u.id = snippets.id_author
+            JOIN users_details ud ON ud.id = u.id_user_details
+            where u.id = :id_user;
+        ');
+
+        $stmt->bindParam(':id_user', $_SESSION['user_id'], PDO::PARAM_INT);
 
         $stmt->execute();
 
