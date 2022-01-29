@@ -7,7 +7,7 @@ class UserRepository extends Repository
 {
     public function getUser(string $email): ?User {
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM public.users
+            SELECT email, password, name, surname, users.id id FROM public.users
             JOIN public.users_details ON users.id_user_details = users_details.id
             WHERE email = :email
         ');

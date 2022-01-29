@@ -74,11 +74,4 @@ class Snippet
     {
         return $this->author_name;
     }
-
-    public function setAuthorName(string $author_name)
-    {
-        $this->author_name = $author_name;
-    }
-
-
 }

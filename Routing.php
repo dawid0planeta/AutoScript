@@ -5,8 +5,6 @@ require_once 'src/controllers/SecurityController.php';
 require_once 'src/controllers/SnippetController.php';
 
 class Routing {
-    public static $get_routes;
-    public static $post_routes;
     public static $routes;
 
     public static function get($url, $controller) {

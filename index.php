@@ -14,6 +14,7 @@ Routing::get('logout', 'SecurityController');
 Routing::post('add_snippet', 'SnippetController');
 Routing::post('register', 'SecurityController');
 Routing::post('login', 'SecurityController');
+Routing::post('search', 'SnippetController');
 
 session_start();
 

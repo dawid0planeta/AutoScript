@@ -46,8 +46,6 @@ class SnippetRepository extends Repository
             VALUES (?, ?, ?, ?, ?, ?, ?)
         ');
         $id_author = $_SESSION['user_id'];
-        $author_name = 'dawid dawid';
-        $snippet->setAuthorName($author_name);
         $stmt->execute([
             $snippet->getTitle(),
             $id_author,
@@ -81,7 +79,7 @@ class SnippetRepository extends Repository
                 $snippet['instruction'],
                 $snippet['platform'],
                 $snippet['snippet_filepath'],
-                $author_name
+                $snippet['name'] . ' ' . $snippet['surname'],
             );
         }
 
@@ -118,5 +116,40 @@ class SnippetRepository extends Repository
         }
 
         return $result;
+    }
+
+    public function searchForSnippets(string $searchString) {
+        $searchString = '%' . strtolower($searchString) . '%';
+        $stmt = $this->database->connect()->prepare('
+            SELECT name, surname, title, description, instruction, platform, snippet_filepath
+            FROM public.snippets
+            JOIN users u ON u.id = snippets.id_author
+            JOIN users_details ud ON ud.id = u.id_user_details
+            where lower(title) like :searchString or lower(description) like :searchString or lower(platform) like :searchString;
+        ');
+
+        $stmt->bindParam(':searchString', $searchString, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function searchForUserSnippets(string $searchString) {
+        $searchString = '%' . strtolower($searchString) . '%';
+        $stmt = $this->database->connect()->prepare('
+            SELECT name, surname, title, description, instruction, platform, snippet_filepath
+            FROM public.snippets
+            JOIN users u ON u.id = snippets.id_author
+            JOIN users_details ud ON ud.id = u.id_user_details
+            where u.id = :id_user and (lower(title) like :searchString or lower(description) like :searchString or lower(platform) like :searchString);
+        ');
+
+        $stmt->bindParam(':id_user', $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt->bindParam(':searchString', $searchString, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

@@ -47,10 +47,9 @@ class SnippetController extends AppController {
             );
 
             $this->snippetRepository->addSnippet($snippet);
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: $url/my_snippets");
 
-
-            return $this->render('my_snippets', [
-                'messages' => $this->messages]);
         }
         return $this->render('add_snippet', ['messages' => $this->messages]);
 
@@ -67,6 +66,27 @@ class SnippetController extends AppController {
         $this->render('my_snippets', ['snippets' => $snippets]);
     }
 
+    public function search() {
+        $contentType = isset($_SERVER['CONTENT_TYPE']) ? trim($_SERVER['CONTENT_TYPE']) : '';
+        if($contentType === 'application/json') {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+            if(!is_array($decoded)) {
+                throw new Exception('Received content contained invalid JSON!');
+            }
+            if ($decoded['path'] === '/catalog') {
+                $snippets = $this->snippetRepository->searchForSnippets($decoded['search']);
+            } else {
+                $snippets = $this->snippetRepository->searchForUserSnippets($decoded['search'], $_SESSION['user_id']);
+            }
+
+            header("Content-Type: application/json");
+            http_response_code(200);
+            echo json_encode($snippets);
+        }
+
+    }
+
     private function validate(array $file): bool {
         if ($file['size'] > self::MAX_FILE_SIZE) {
             $this->messages[] = 'File is too large';
@@ -80,4 +100,6 @@ class SnippetController extends AppController {
 
         return true;
     }
+
+
 }
