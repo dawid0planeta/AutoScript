@@ -28,28 +28,8 @@
                         <label><input type="checkbox" name="consent" value="consent">I agree to selling my soul</label>
                     </div>
                     <div class="box-content">
-                        <p>Choose platforms you use:</p>
-                        <select name="platform1">
-                            <option value="windows">Windows</option>
-                            <option value="linux">Linux</option>
-                            <option value="macos">MacOS</option>
-                            <option value="photoshop">Adobe Photoshop</option>
-                            <option value="illustrator">Adobe illustrator</option>
-                        </select>
-                        <select name="platform2">
-                            <option value="windows">Windows</option>
-                            <option value="linux">Linux</option>
-                            <option value="macos">MacOS</option>
-                            <option value="photoshop">Adobe Photoshop</option>
-                            <option value="illustrator">Adobe illustrator</option>
-                        </select>
-                        <select name="platform3">
-                            <option value="windows">Windows</option>
-                            <option value="linux">Linux</option>
-                            <option value="macos">MacOS</option>
-                            <option value="photoshop">Adobe Photoshop</option>
-                            <option value="illustrator">Adobe illustrator</option>
-                        </select>
+                        <input name="name" type="text" placeholder="John">
+                        <input name="surname" type="text" placeholder="Snow">
                     </div>
                 </div>
                 <div class="box-buttons">

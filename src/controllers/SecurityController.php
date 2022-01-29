@@ -26,7 +26,7 @@ class SecurityController extends AppController {
             return $this->render('login', ['messages' => ["User with this email not found"]]);
         }
 
-        if ($user->getPassword() !== $password) {
+        if (password_verify($user->getPassword(), password_hash($password, PASSWORD_DEFAULT))) {
             return $this->render('login', ['messages' => ["Wrong password"]]);
         }
 
@@ -41,8 +41,28 @@ class SecurityController extends AppController {
         if (!$this->isPost()) {
             return $this->render('register');
         }
-        var_dump($_POST);
-        die();
+
+        $userRepository = new UserRepository();
+
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $user = $userRepository->getUser($email);
+
+
+        if ($user) {
+            return $this->render('login', ['messages' => ["User exists"]]);
+        }
+
+        $userRepository->addUser($email, $password, $_POST['name'], $_POST['surname']);
+        $user = $userRepository->getUser($email);
+
+        setcookie('user_id', $user->getId(), time() + (86400 * 30), "/");
+        $_SESSION['user_id'] = $user->getId();
+
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: $url/my_snippets");
+
     }
 
     public function logout() {
