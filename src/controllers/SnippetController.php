@@ -24,6 +24,12 @@ class SnippetController extends AppController {
 
 
     public function add_snippet() {
+        if (!isset($_SESSION['user_id']))
+        {
+            $url = "http://$_SERVER[HTTP_HOST]";
+                header("Location: $url/login");
+            die();
+        }
         if ($this->isPost() && is_uploaded_file($_FILES['snippet_file']['tmp_name']) && $this->validate($_FILES['snippet_file'])) {
             move_uploaded_file(
                 $_FILES['snippet_file']['tmp_name'],
@@ -51,6 +57,12 @@ class SnippetController extends AppController {
     }
 
     public function my_snippets() {
+        if (!isset($_SESSION['user_id']))
+        {
+            $url = "http://$_SERVER[HTTP_HOST]";
+                header("Location: $url/login");
+            die();
+        }
         $snippets = $this->snippetRepository->getUserSnippets($_SESSION['user_id']);
         $this->render('my_snippets', ['snippets' => $snippets]);
     }

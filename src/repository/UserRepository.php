@@ -7,7 +7,9 @@ class UserRepository extends Repository
 {
     public function getUser(string $email): ?User {
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM public.users WHERE email = :email
+            SELECT * FROM public.users
+            JOIN public.users_details ON users.id_user_details = users_details.id
+            WHERE email = :email
         ');
 
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);

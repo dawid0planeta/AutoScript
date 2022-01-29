@@ -8,12 +8,13 @@ class User
     private $surname;
     private $id;
 
-    public function __construct(string $email, string $password, string $name, string $surname)
+    public function __construct(string $email, string $password, string $name, string $surname, int $id)
     {
         $this->email = $email;
         $this->password = $password;
         $this->name = $name;
         $this->surname = $surname;
+        $this->id = $id;
     }
 
     public function getEmail(): string

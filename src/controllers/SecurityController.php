@@ -30,6 +30,7 @@ class SecurityController extends AppController {
             return $this->render('login', ['messages' => ["Wrong password"]]);
         }
 
+        setcookie('user_id', $user->getId(), time() + (86400 * 30), "/");
         $_SESSION['user_id'] = $user->getId();
 
         $url = "http://$_SERVER[HTTP_HOST]";
@@ -42,6 +43,14 @@ class SecurityController extends AppController {
         }
         var_dump($_POST);
         die();
+    }
+
+    public function logout() {
+        unset($_SESSION['user_id']);
+        setcookie("user_id", "", time() - 3600);
+
+        $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: $url");
     }
 
 }

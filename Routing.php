@@ -22,6 +22,7 @@ class Routing {
         if (!array_key_exists($action, self::$routes)) {
             die("URL doesn't exist");
         }
+
         $controller = self::$routes[$action];
         $object = new $controller();
         $action = $action ?: 'index';
