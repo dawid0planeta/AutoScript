@@ -7,15 +7,17 @@ class Snippet
     private $instruction;
     private $platform;
     private $snippet_file;
+    private $author_name;
 
 
-    public function __construct(string $title, string $description, string $instruction, string $platform, string $snippet_file)
+    public function __construct(string $title, string $description, string $instruction, string $platform, string $snippet_file, string $author_name)
     {
         $this->title = $title;
         $this->description = $description;
         $this->instruction = $instruction;
         $this->platform = $platform;
         $this->snippet_file = $snippet_file;
+        $this->author_name = $author_name;
     }
 
     public function getTitle(): string
@@ -67,5 +69,16 @@ class Snippet
     {
         $this->snippet_file = $snippet_file;
     }
+
+    public function getAuthorName(): string
+    {
+        return $this->author_name;
+    }
+
+    public function setAuthorName(string $author_name)
+    {
+        $this->author_name = $author_name;
+    }
+
 
 }

@@ -351,13 +351,14 @@ hr {
 
 /* snippet gallery */
 .background-long {
-    width: 100vw;
+    width: 100%;
+    min-height: 100vh;
     height: auto;
     background: transparent linear-gradient(180deg, #FF5757 0%, #005D7E 100%) 0% 0% no-repeat padding-box;
     opacity: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -391,20 +392,18 @@ hr {
 
 .snippet-gallery ul {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1em;
 }
 
 .snippet-gallery li {
-    width: 32%;
     background: #0A0000 0% 0% no-repeat padding-box;
     border-radius: 3px;
+    height: 50vh;
     opacity: 0.85;
     margin: 1% 0;
-    padding: 2% 2%;
+    padding: 7% 7%;
 }
 
 
@@ -465,6 +464,9 @@ hr {
     color: #FFFFFF;
     text-align: left;
     opacity: 0.7;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 100%;
 
 }
 

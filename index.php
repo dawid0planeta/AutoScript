@@ -8,8 +8,7 @@ $path = parse_url($path, PHP_URL_PATH);
 
 Routing::get('', 'DefaultController');
 Routing::get('index', 'DefaultController');
-Routing::get('catalog', 'DefaultController');
-Routing::get('register_page', 'DefaultController');
+Routing::get('catalog', 'SnippetController');
 Routing::get('my_snippets', 'SnippetController');
 Routing::post('add_snippet', 'SnippetController');
 Routing::post('register', 'SecurityController');

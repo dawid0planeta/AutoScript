@@ -2,35 +2,49 @@
 
 require_once 'AppController.php';
 require_once __DIR__.'/../models/Snippet.php';
+require_once __DIR__.'/../repository/SnippetRepository.php';
 
 class SnippetController extends AppController {
     const MAX_FILE_SIZE = 1024*1024;
     const SUPPORTED_TYPES = ['text/plain'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
+    private $snippetRepository;
 
     private $messages = [];
+
+    public function __construct() {
+        parent::__construct();
+        $this->snippetRepository = new SnippetRepository();
+    }
+
+    public function catalog() {
+        $snippets = $this->snippetRepository->getAllSnippets();
+        $this->render('catalog', ['snippets' => $snippets]);
+    }
+
+
     public function add_snippet() {
-        echo exec('whoami');
-        if ($this->isPost()) {
-            var_dump($_FILES);
-        }
         if ($this->isPost() && is_uploaded_file($_FILES['snippet_file']['tmp_name']) && $this->validate($_FILES['snippet_file'])) {
-            echo "here";
             move_uploaded_file(
                 $_FILES['snippet_file']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['snippet_file']['name']
             );
+
 
             $snippet = new snippet(
                 $_POST['title'],
                 $_POST['description'],
                 $_POST['instruction'],
                 $_POST['platform'],
-                $_FILES['snippet_file']['name']
+                $_FILES['snippet_file']['name'],
+                ''
             );
 
-            return var_dump($snippet);
-            //return $this->render('my_snippets', ['messages' => $this->messages]);
+            $this->snippetRepository->addSnippet($snippet);
+
+
+            return $this->render('my_snippets', [
+                'messages' => $this->messages]);
         }
         return $this->render('add_snippet', ['messages' => $this->messages]);
 
