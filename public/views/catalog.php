@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="./public/js/search.js" defer></script>
     <title>Snippet Catalog</title>
 </head>
 <body>
@@ -37,13 +36,13 @@
                                         <p>by <?= $snippet->getAuthorName();?></p>
                                     </div>
                                 </div>
-                                <img src="public/img/<?= $snippet->getPlatform();?>.svg" alt="illustrator"/>
+                                <img src="public/img/<?= $snippet->getPlatform();?>.svg" alt="<?= $snippet->getPlatform();?>"/>
                             </div>
                             <div class="snippet-description">
                                 <p><?= $snippet->getDescription();?></p>
                             </div>
                             <div class="snippet-show-more">
-                                <a href="#">Show more</a>
+                                <a href="/snippet/<?= $snippet->getId();?>">Show more</a>
                             </div>
                         </div>
                     </li>

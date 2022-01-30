@@ -49,7 +49,7 @@ function createSnippet(snippet) {
     const author_name = clone.querySelector('#author-name');
     author_name.innerHTML = `by ${snippet.name} ${snippet.surname}`;
     const link = clone.querySelector('a');
-    link.href = '/snippet/${snippet.id}';
+    link.href = `/snippet/${snippet.id}`;
 
     snippetContainer.appendChild(clone);
 }

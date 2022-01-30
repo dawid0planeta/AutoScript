@@ -45,6 +45,23 @@ class UserRepository extends Repository
         ]);
     }
 
+    public function isMod(int $user_id): bool {
+        $stmt = $this->database->connect()->prepare('
+            SELECT id_user_role FROM public.users WHERE id = :id
+        ');
+
+        $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $user_role = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user_role['id_user_role'] == $this->getUserRole('moderator')) {
+            return true;
+        }
+
+        return false;
+    }
+
     private function addUserDetails(string $name, string $surname): int {
         $stmt = $this->database->connect()->prepare('
             INSERT INTO public.users_details (name, surname)
@@ -73,6 +90,8 @@ class UserRepository extends Repository
 
         return $role['id'];
     }
+
+
 
 
 }

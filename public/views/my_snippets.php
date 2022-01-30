@@ -33,13 +33,13 @@
                                         <p>by <?= $snippet->getAuthorName();?></p>
                                     </div>
                                 </div>
-                                <img src="public/img/<?= $snippet->getPlatform();?>.svg" alt="illustrator"/>
+                                <img src="public/img/<?= $snippet->getPlatform();?>.svg" alt="<?= $snippet->getPlatform();?>"/>
                             </div>
                             <div class="snippet-description">
                                 <p><?= $snippet->getDescription();?></p>
                             </div>
                             <div class="snippet-show-more">
-                                <a href="#">Show more</a>
+                                <a href="/snippet/<?= $snippet->getId();?>">Show more</a>
                             </div>
                         </div>
                     </li>

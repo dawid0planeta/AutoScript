@@ -16,14 +16,26 @@ class Routing {
     }
 
     public static function run($url, $method) {
-        $action = explode('/', $url)[0];
+        $url_elems = explode('/', $url);
+        $action = $url_elems[0];
         if (!array_key_exists($action, self::$routes)) {
-            die("URL doesn't exist");
+            die($url_elems);
+            // die("URL doesn't exist");
         }
 
         $controller = self::$routes[$action];
         $object = new $controller();
         $action = $action ?: 'index';
-        $object->$action();
+        if ($action == 'snippet' || $action == 'download_snippet' || $action == 'delete_snippet') {
+            $snippet_id = $url_elems[1];
+            if ($snippet_id) {
+                $object->$action($snippet_id);
+            } else {
+                $object->catalog();
+            }
+        } else {
+            $object->$action();
+        }
+
     }
 }

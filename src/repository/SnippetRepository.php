@@ -36,6 +36,7 @@ class SnippetRepository extends Repository
             $snippet['platform'],
             $snippet['snippet_filepath'],
             $author_name,
+            $snippet['id']
         );
     }
 
@@ -57,12 +58,21 @@ class SnippetRepository extends Repository
         ]);
     }
 
+    public function deleteSnippet(int $id): void {
+        $stmt = $this->database->connect()->prepare('
+            DELETE FROM public.snippets WHERE id = :id
+        ');
+
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
     public function getAllSnippets(): array {
         $result = [];
         $stmt = $this->database->connect()->prepare('
-            SELECT name, surname, title, description, instruction, platform, snippet_filepath
-            FROM public.snippets
-            JOIN users u ON u.id = snippets.id_author
+            SELECT s.id, name, surname, title, description, instruction, platform, snippet_filepath
+            FROM public.snippets s
+            JOIN users u ON u.id = s.id_author
             JOIN users_details ud ON ud.id = u.id_user_details;
         ');
 
@@ -80,6 +90,7 @@ class SnippetRepository extends Repository
                 $snippet['platform'],
                 $snippet['snippet_filepath'],
                 $snippet['name'] . ' ' . $snippet['surname'],
+                $snippet['id']
             );
         }
 
@@ -89,9 +100,9 @@ class SnippetRepository extends Repository
     public function getUserSnippets(): array {
         $result = [];
         $stmt = $this->database->connect()->prepare('
-            SELECT name, surname, title, description, instruction, platform, snippet_filepath
-            FROM public.snippets
-            JOIN users u ON u.id = snippets.id_author
+            SELECT s.id, name, surname, title, description, instruction, platform, snippet_filepath
+            FROM public.snippets s
+            JOIN users u ON u.id = s.id_author
             JOIN users_details ud ON ud.id = u.id_user_details
             where u.id = :id_user;
         ');
@@ -111,7 +122,8 @@ class SnippetRepository extends Repository
                 $snippet['instruction'],
                 $snippet['platform'],
                 $snippet['snippet_filepath'],
-                $author_name
+                $author_name,
+                $snippet['id']
             );
         }
 
@@ -121,9 +133,9 @@ class SnippetRepository extends Repository
     public function searchForSnippets(string $searchString) {
         $searchString = '%' . strtolower($searchString) . '%';
         $stmt = $this->database->connect()->prepare('
-            SELECT name, surname, title, description, instruction, platform, snippet_filepath
-            FROM public.snippets
-            JOIN users u ON u.id = snippets.id_author
+            SELECT s.id, name, surname, title, description, instruction, platform, snippet_filepath
+            FROM public.snippets s
+            JOIN users u ON u.id = s.id_author
             JOIN users_details ud ON ud.id = u.id_user_details
             where lower(title) like :searchString or lower(description) like :searchString or lower(platform) like :searchString;
         ');
@@ -138,9 +150,9 @@ class SnippetRepository extends Repository
     public function searchForUserSnippets(string $searchString) {
         $searchString = '%' . strtolower($searchString) . '%';
         $stmt = $this->database->connect()->prepare('
-            SELECT name, surname, title, description, instruction, platform, snippet_filepath
-            FROM public.snippets
-            JOIN users u ON u.id = snippets.id_author
+            SELECT s.id, name, surname, title, description, instruction, platform, snippet_filepath
+            FROM public.snippets s
+            JOIN users u ON u.id = s.id_author
             JOIN users_details ud ON ud.id = u.id_user_details
             where u.id = :id_user and (lower(title) like :searchString or lower(description) like :searchString or lower(platform) like :searchString);
         ');
@@ -151,5 +163,17 @@ class SnippetRepository extends Repository
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAuthorId(Snippet $snippet): int {
+        $stmt = $this->database->connect()->prepare('
+            SELECT id_author FROM public.snippets WHERE id = :id_snippet;
+        ');
+
+        $stmt->bindParam(':id_snippet', $snippet->getId(), PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC)['id_author'];
     }
 }
