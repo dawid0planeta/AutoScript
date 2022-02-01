@@ -108,11 +108,8 @@ class SnippetRepository extends Repository
         ');
 
         $stmt->bindParam(':id_user', $_SESSION['user_id'], PDO::PARAM_INT);
-
         $stmt->execute();
-
         $snippets = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 
         foreach ($snippets as $snippet) {
             $author_name = $snippet['name'] . ' ' . $snippet['surname'];
@@ -141,7 +138,6 @@ class SnippetRepository extends Repository
         ');
 
         $stmt->bindParam(':searchString', $searchString, PDO::PARAM_STR);
-
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -159,7 +155,6 @@ class SnippetRepository extends Repository
 
         $stmt->bindParam(':id_user', $_SESSION['user_id'], PDO::PARAM_INT);
         $stmt->bindParam(':searchString', $searchString, PDO::PARAM_STR);
-
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -19,8 +19,7 @@ class Routing {
         $url_elems = explode('/', $url);
         $action = $url_elems[0];
         if (!array_key_exists($action, self::$routes)) {
-            die($url_elems);
-            // die("URL doesn't exist");
+            die("URL doesn't exist");
         }
 
         $controller = self::$routes[$action];
@@ -36,6 +35,5 @@ class Routing {
         } else {
             $object->$action();
         }
-
     }
 }

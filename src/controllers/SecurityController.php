@@ -15,7 +15,6 @@ class SecurityController extends AppController {
 
         $email = $_POST['email'];
         $password = $_POST['password'];
-
         $user = $userRepository->getUser($email);
 
         if (!$user) {
@@ -43,12 +42,9 @@ class SecurityController extends AppController {
         }
 
         $userRepository = new UserRepository();
-
         $email = $_POST['email'];
         $password = $_POST['password'];
-
         $user = $userRepository->getUser($email);
-
 
         if ($user) {
             return $this->render('login', ['messages' => ["User exists"]]);
@@ -72,5 +68,4 @@ class SecurityController extends AppController {
         $url = "http://$_SERVER[HTTP_HOST]";
             header("Location: $url");
     }
-
 }

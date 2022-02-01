@@ -14,7 +14,6 @@ class UserRepository extends Repository
 
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
-
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user == false) {
@@ -90,8 +89,4 @@ class UserRepository extends Repository
 
         return $role['id'];
     }
-
-
-
-
 }

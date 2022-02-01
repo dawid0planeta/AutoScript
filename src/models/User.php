@@ -57,11 +57,13 @@ class User
         $this->surname = $surname;
     }
 
-    public function getId(): int {
+    public function getId(): int
+    {
         return $this->id;
     }
 
-    public function setId(int $id) {
+    public function setId(int $id)
+    {
         $this->id = $id;
     }
 

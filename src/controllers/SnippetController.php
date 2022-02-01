@@ -9,8 +9,8 @@ class SnippetController extends AppController {
     const MAX_FILE_SIZE = 1024*1024;
     const SUPPORTED_TYPES = ['text/plain'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
-    private $snippetRepository;
 
+    private $snippetRepository;
     private $messages = [];
 
     public function __construct() {
@@ -22,7 +22,6 @@ class SnippetController extends AppController {
         $snippets = $this->snippetRepository->getAllSnippets();
         $this->render('catalog', ['snippets' => $snippets]);
     }
-
 
     public function add_snippet() {
         if (!isset($_SESSION['user_id']))
@@ -36,7 +35,6 @@ class SnippetController extends AppController {
                 $_FILES['snippet_file']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['snippet_file']['name']
             );
-
 
             $snippet = new snippet(
                 $_POST['title'],
@@ -53,7 +51,6 @@ class SnippetController extends AppController {
 
         }
         return $this->render('add_snippet', ['messages' => $this->messages]);
-
     }
 
     public function my_snippets() {
@@ -145,6 +142,4 @@ class SnippetController extends AppController {
 
         return true;
     }
-
-
 }
